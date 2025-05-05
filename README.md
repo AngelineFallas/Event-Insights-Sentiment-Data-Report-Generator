@@ -1,39 +1,83 @@
-# Event Insights – Sentiment & Data Report Generator
+📊 EventInsights: Sentiment-Based Feedback Analyzer (Prototype)
 
-This project analyzes feedback from volunteers and donators to generate a detailed sentiment and participation report using Natural Language Processing (NLP) and data visualization techniques.
+This project is a prototype designed to analyze textual feedback using Natural Language Processing (NLP) and generate a structured Excel report. It groups comments by sentiment and user type (Volunteer or Donator), helping organizations understand motivations, positive highlights, and areas for improvement.
 
-## Features
+🛆 Requirements & Installation
 
-- Sentiment analysis using the `nlptown/bert-base-multilingual-uncased-sentiment` model
-- Separate insights for volunteers and donators
-- Age distribution, participation, and sentiment graphs
-- Summary tables for motivations, positive comments, and suggested improvements
-- Automatic Excel report generation with embedded graphs
-- Analysis timestamp and duration logging
+Before running the script, install the required libraries using:
 
-## Technologies Used
+pip install pandas matplotlib seaborn openpyxl textblob nltk
 
-- **Python**
-- **Pandas** for data processing
-- **Transformers (Hugging Face)** for sentiment analysis
-- **Matplotlib & Seaborn** for visualizations
-- **Openpyxl** for Excel report creation
-- **Counter** for textual frequency analysis
+You also need to download the vader_lexicon for TextBlob's sentiment analysis to work correctly:
 
-## Input
+import nltk
+nltk.download('vader_lexicon')
 
-CSV file with feedback including:
-- Role (Volunteer/Donator)
-- Age
-- Motivations, experiences, and improvement suggestions
+🧠 Why These Libraries?
 
-## Output
+Pandas: Efficient data manipulation and Excel exportation.
 
-An Excel file named `EventInsights_<timestamp>.xlsx` containing:
-- Two sheets for volunteer and donator insights
-- A summary sheet with graphs and analysis metadata
-- Charts and frequency tables
+TextBlob + NLTK: Lightweight NLP tools suitable for basic sentiment classification.
 
-## Purpose
+Matplotlib & Seaborn: For generating clear and professional visualizations.
 
-The tool was designed to support decision-making in community events by understanding participant motivations, experiences, and suggestions through AI-powered analysis.
+OpenPyXL: To manage multi-sheet Excel reports with formatting.
+
+These were chosen for their simplicity and ease of integration in a lightweight prototype. More advanced models (e.g., from Hugging Face) may be used for production-grade implementations.
+
+⚙️ How It Works
+
+The script reads a .csv file with user feedback including fields like role (Volunteer/Donator), age, and comment.
+
+It performs sentiment analysis using TextBlob and classifies each comment as Positive, Neutral, or Negative.
+
+It generates an Excel file with the following sheets:
+
+Execution Log: Contains timestamp, number of comments processed, and runtime duration.
+
+Analysis Summary: A combined overview, including total feedback and role distribution.
+
+Volunteers Report: Insights specific to volunteers.
+
+Donators Report: Insights specific to donators.
+
+
+Each detailed report includes:
+
+Bar plots of age distribution.
+
+Comment counts per sentiment.
+
+Extracted summaries: Motivations, Highlights, and Suggestions for Improvement.
+
+The Excel filename is auto-generated as:EventInsights_YYYY-MM-DD_HH-MM-SS.xlsx
+
+📝 Output Files in This Repository
+
+FeelingAnalizer.py: Main Python script.
+
+volunteering_data(2).csv: Sample dataset used in this analysis.
+
+EventInsights_2025-04-03_19-36-52.xlsx: Final generated report from the sample data.
+
+💼 Application Potential
+
+Although developed for a volunteer-donator feedback context, this prototype can be adapted to customer service or product review analysis. To do so:
+
+Replace the feedback_data.csv with your own feedback dataset.
+
+Adjust role filters in the code:(Change "Volunteer"/"Donator" labels as needed.)
+
+Optionally customize the summary sections and visualizations for your context.
+
+🚀 Future Improvements (if scaled)
+
+Use multilingual or transformer-based NLP models (e.g., BERT).
+
+Integrate with a front-end or dashboard for dynamic interaction.
+
+Automate email report delivery or real-time monitoring.
+
+👤 About the Author
+
+I'm a creative individual who believes in using technology to support meaningful causes. This repository is part of my personal portfolio, as someone motivated by the potential of AI to improve the world we live in.
